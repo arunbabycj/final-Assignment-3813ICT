@@ -1,0 +1,18 @@
+.edit-form {
+  min-width : 150px;
+
+}
+
+.logbutton {
+  min-width : 150px;
+  float: right;
+}
+
+#disgroup {
+  min-width : 150px;
+  float: right;
+}
+
+.field-full-width {
+  width:100%;
+}

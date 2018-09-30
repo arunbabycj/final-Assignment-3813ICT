@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+.mat-column-right {
+  text-align: center;
+}
+
+#search {
+  float:right;
+  margin: 500px;
+}
