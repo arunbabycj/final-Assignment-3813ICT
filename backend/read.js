@@ -26,6 +26,18 @@ module.exports = function(app, db){
     //console.log(req.body)
     db.collection("users").findOne({"username":req.params.user}, function(err, issues) {
       //db.collection("users").findOne({"username":user}, function(err, result) {
+      //console.log("issues",issues);
+      if (err)
+          console.log(err);
+      else
+          res.json(issues);
+    });
+  });
+
+  app.get('/restgroups/:user', (req, res) => {
+    //console.log(req.body)
+    db.collection("groups").find({}).toArray(function(err, issues) {
+      //db.collection("users").findOne({"username":user}, function(err, result) {
       console.log("issues",issues);
       if (err)
           console.log(err);

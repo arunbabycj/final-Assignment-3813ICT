@@ -13,7 +13,7 @@ module.exports = function(app, db){
         db.collection("users").insertOne(myobj, function(err, res) {
           if (err) throw err;
           console.log("data added");
-          console.log(res);
+          //console.log(res);
 
         });
         res.send({"ok": true});

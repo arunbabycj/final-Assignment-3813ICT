@@ -21,6 +21,10 @@ export class IssueService {
   getGroups(user) {
     return this.http.get(`${this.uri}/groups/${user}`);
   }
+
+  getRestGroups(user) {
+    return this.http.get(`${this.uri}/restgroups/${user}`);
+  }
   // searchIssue(data) {
   //   return this.http.get(`${this.uri}/search/${data}`);
   // }
