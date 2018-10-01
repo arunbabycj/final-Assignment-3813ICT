@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
 //import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 
 import {MatToolbarModule,MatFormFieldModule,
@@ -23,11 +25,13 @@ import { CreateComponent } from './components/create/create.component';
 import { EditComponent } from './components/edit/edit.component';
 
 import { IssueService } from './issue.service';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   { path: 'create', component: CreateComponent },
   { path: 'edit', component: EditComponent },
   { path: 'list', component: ListComponent },
+  { path: 'chat', component: ChatComponent },
   { path: '', redirectTo: '/list', pathMatch: 'full'}
 ];
 
@@ -36,7 +40,8 @@ const routes: Routes = [
     AppComponent,
     ListComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    ChatComponent
   ],
 
   imports: [
@@ -55,7 +60,8 @@ const routes: Routes = [
   MatCardModule,
   MatTableModule,
   MatDividerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  FormsModule
   ],
   providers: [IssueService],
   bootstrap: [AppComponent]

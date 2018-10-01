@@ -23,11 +23,11 @@ export class EditComponent implements OnInit {
 
   //createForm: FormGroup;
   joinedgroups: Issue[];
-  restgroups: ;
+  restgroups:String;
   displayedColumns = ['name'];
   sessionuser = "";
   join ="" ;
-  rest =" ";
+  rest:String =" ";
   res = "";
   diffdata = [];
   constructor(private issueService: IssueService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private fb: FormBuilder) {
@@ -70,11 +70,23 @@ export class EditComponent implements OnInit {
           num = i;
         }
         this.rest = data[num].allgroup;
-        console.log("hi",this.rest);
-        this.res = this.rest.filter( function(n) { return !this.has(n) }, new Set(this.join) );
-        console.log(this.res);
+        // console.log("hi",this.rest);
+        // this.res = this.rest.filter( function(n) { return !this.has(n) }, new Set(this.join) );
+        // console.log(this.res);
+          var missings = [];
+          var matches = false;
+
+          for ( var i = 0; i < this.rest.length; i++ ) {
+            matches = false;
+            for ( var e = 0; e < this.join.length; e++ ) {
+              if ( this.rest[i] === this.join[e] ) matches = true;
+            }
+            if(!matches) missings.push( this.rest[i] );
+          }
+
       }
-      this.restgroups = this.res;
+      //this.restgroups = this.res;
+    //  this.restgroups = missings;
       console.log('rest group requested ... ');
       console.log(this.restgroups);
       this.router.navigate(['/edit']);

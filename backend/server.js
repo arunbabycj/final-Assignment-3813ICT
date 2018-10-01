@@ -1,12 +1,27 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const cors = require('cors');
+//const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const fs = require('fs');
+app.use(express.static(path.join(__dirname , '../dist/Assignment2/')));
 
-app.use(cors());
+// Cross origin resource sharing to cater for port 4200 to port 3000
+// This is not required if running from ng build then client and server both run on port 3000
+// See https://github.com/expressjs/cors for implementation example
+const cors = require('cors');
+const corsOptions = {
+  origin: 'http://localhost:4200', // Angular server address and port
+  optionsSuccessStatus: 200 //
+};
+
+// Set up CORS (Cross Site)
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
-
+require('./listen.js')(http);
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
@@ -26,8 +41,9 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
     require('./read.js')(app, db);
     require('./add.js')(app, db);
     require('./update.js')(app, db);
-
+    require('./socket.js')(app, io, fs);
     require('./remove.js')(app, db);
+
 
     db.collection("users").find({}).toArray(function(err, issues) {
       if (err)
@@ -174,4 +190,4 @@ var arraygroup = [];
 // });
 app.use('/', router);
 
-app.listen(3000, () => console.log('Express server running on port 3000'));
+//app.listen(3000, () => console.log('Express server running on port 3000'));
